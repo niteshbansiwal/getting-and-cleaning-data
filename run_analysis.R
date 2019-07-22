@@ -4,17 +4,25 @@
 
 # Loadingh training and testing data
 setwd("C:\\Users/nb21033/Desktop/course2/UCI HAR Dataset/")
+
+#Reading all the file and storing the variable names.
 testing_data = read.csv("test/X_test.txt", sep="", header=F)
-training_data = read.csv("train/X_train.txt", sep="", header=F)
 testing_data[,562] = read.csv("test/Y_test.txt", sep="", header=F)
-training_data[,562] = read.csv("train/Y_train.txt", sep="", header=F)
+#reading Subject data
 testing_data[,563] = read.csv("test/subject_test.txt", sep="", header=F)
+
+
+#testing data
+training_data = read.csv("train/X_train.txt", sep="", header=F)
+training_data[,562] = read.csv("train/Y_train.txt", sep="", header=F)
+
+#testing subject data
 training_data[,563] = read.csv("train/subject_train.txt", sep="", header=F)
 
 
 
 # Loading activity labels
-activityLabels = read.csv("activity_labels.txt", sep="", header=F)
+actvtylabels = read.csv("activity_labels.txt", sep="", header=F)
 
 # Loading all features
 features = read.csv("features.txt", sep="", header=FALSE)
@@ -44,7 +52,7 @@ colnames(data) <- c(features$V2, "Activity", "Subject")
 colnames(data) <- tolower(colnames(data))
 
 currentActivity = 1
-for (currentActivityLabel in activityLabels$V2) {
+for (currentActivityLabel in actvtylabels$V2) {
     data$activity <- gsub(currentActivity, currentActivityLabel, data$activity)
     currentActivity <- currentActivity + 1
 }
